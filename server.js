@@ -20,6 +20,7 @@ app.get("/", (req, res) => {
 });
 
 // set port, listen for requests
+require("./app/routes/tutorial.routes")(app);
 const PORT = process.env.PORT || 3000;
 db.mongoose.connect(db.url)
 .then(()=>{
