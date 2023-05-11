@@ -1,26 +1,21 @@
 const express = require("express");
 const cors = require("cors");
-const mongoose = require('mongoose')
-const app = express();
+const mongoose = require('mongoose');
 const db = require("./app/models");
-
-// var corsOptions = {
-//   origin: "http://localhost:8081"
-// };
-// app.use(cors(corsOptions));
+const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-
 
 // simple route
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to Golestan application." });
 });
 
+
 // set port, listen for requests
 require("./app/routes/tutorial.routes")(app);
+require("./app/routes/course.routes")(app);
 const PORT = process.env.PORT || 3000;
 db.mongoose.connect(db.url)
 .then(()=>{
