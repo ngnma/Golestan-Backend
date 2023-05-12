@@ -1,6 +1,12 @@
 const student_c = require("../controllers/student.controller");
+const user_c = require("../controllers/admin.controller");
 
 module.exports = function(app){
+
+    // Create admin(IT)
+    app.post("/IT", user_c.create)
+    // Get All Users
+    app.get("/Users", user_c.getAll)
 
     // Manager - student
     app.get("/students", student_c.getAll); 

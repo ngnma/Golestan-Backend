@@ -1,6 +1,6 @@
 const User = require('../models/user.model')
 
-// Get All Admins
+// Get All Users
 exports.getAll = async(req,res)=>{
     try{
         const admins = await User.find({});
@@ -14,7 +14,7 @@ exports.getAll = async(req,res)=>{
 exports.create = async(req,res)=>{
     try{
         const admin = await User.create(req.body);
-        res.status(200).json(student);
+        res.status(200).json(admin);
     }catch(error){
         console.log(error.message);
         res.status(500).json({message:error.message});
