@@ -14,13 +14,28 @@ verifyToken = (req,res,next)=>{
             return res.status(401).send({message:"Invalid token"});
         }
         req.userId = decoded.id;
-        req.userRole = decoded.role
+        req.userRole = decoded.role;
+        req.paramId = req.params.id;
+        console.log(req.paramId)
         next()
     });
 }
 
 // Auth for being Manager
 isManager = (req,res,next)=>{
+    try{
+        if(req.userRole == "manager"){
+            next();
+            return;
+        }
+        res.status(403).send({message:"Required Manager role."});       
+    }catch(error){
+        res.status(500).json({message:error.message});
+    }
+};
+
+// Auth for being Admin
+isAdmin = (req,res,next)=>{
     try{
         if(req.userRole == "admin"){
             next();
@@ -31,8 +46,21 @@ isManager = (req,res,next)=>{
         res.status(500).json({message:error.message});
     }
 };
+IDVerify = (req,res,next)=>{
+    try{
+        if(req.paramId == req.userId){
+            next();
+            return;
+        }
+        res.status(403).send({message:`Access denied(you are not the student with id ${req.paramId}`}); 
+    }catch(error){
+        res.status(500).json({message:error.message});
+    }
+}
 const authJwt = {
     verifyToken,
-    isManager
+    isManager,
+    isAdmin,
+    IDVerify
 };
 module.exports = authJwt;

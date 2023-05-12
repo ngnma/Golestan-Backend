@@ -14,35 +14,35 @@ module.exports = function(app){
     app.post("/login", user_c.login)
 
     // Manager - student
-    app.get("/students",[authJwt.verifyToken,authJwt.isManager] ,student_c.getAll); 
-    app.get("/student/:id", student_c.getById);
+    app.get("/students", [authJwt.verifyToken,authJwt.isManager] ,student_c.getAll); 
+    app.get("/student/:id", [authJwt.verifyToken,authJwt.isManager], student_c.getById);
     // Manager - Professor
-    app.get("/Professors", professor_c.getAll); 
-    app.get("/Professor/:id", professor_c.getById);
+    app.get("/Professors", [authJwt.verifyToken,authJwt.isManager], professor_c.getAll); 
+    app.get("/Professor/:id", [authJwt.verifyToken,authJwt.isManager], professor_c.getById);
 
-    // IT - Professor
-    app.post("/admin/Professor", professor_c.create); 
-    app.put("/admin/Professor/:id", professor_c.updateById); 
-    app.delete("/admin/Professor/:id", professor_c.deleteById); 
-    app.get("/admin/Professors", professor_c.getAll); 
-    app.get("/admin/Professor/:id", professor_c.getById); 
-    // IT - student
-    app.post("/admin/student", student_c.create); 
-    app.put("/admin/student/:id", student_c.updateById); 
-    app.delete("/admin/student/:id", student_c.deleteById); 
-    app.get("/admin/students", student_c.getAll); 
-    app.get("/admin/student/:id", student_c.getById);
-    // IT - manager
-    app.post("/admin/manager", manager_c.create); 
-    app.put("/admin/manager/:id", manager_c.updateById); 
-    app.delete("/admin/manager/:id", manager_c.deleteById); 
-    app.get("/admin/managers", manager_c.getAll); 
-    app.get("/admin/manager/:id", manager_c.getById); 
+    // Admin(IT) - Professor
+    app.post("/admin/Professor", [authJwt.verifyToken,authJwt.isAdmin], professor_c.create); 
+    app.put("/admin/Professor/:id", [authJwt.verifyToken,authJwt.isAdmin], professor_c.updateById); 
+    app.delete("/admin/Professor/:id", [authJwt.verifyToken,authJwt.isAdmin], professor_c.deleteById); 
+    app.get("/admin/Professors", [authJwt.verifyToken,authJwt.isAdmin], professor_c.getAll); 
+    app.get("/admin/Professor/:id", [authJwt.verifyToken,authJwt.isAdmin], professor_c.getById); 
+    // Admin(IT) - student
+    app.post("/admin/student", [authJwt.verifyToken,authJwt.isAdmin], student_c.create); 
+    app.put("/admin/student/:id", [authJwt.verifyToken,authJwt.isAdmin], student_c.updateById); 
+    app.delete("/admin/student/:id", [authJwt.verifyToken,authJwt.isAdmin], student_c.deleteById); 
+    app.get("/admin/students", [authJwt.verifyToken,authJwt.isAdmin], student_c.getAll); 
+    app.get("/admin/student/:id", [authJwt.verifyToken,authJwt.isAdmin], student_c.getById);
+    // Admin(IT) - manager
+    app.post("/admin/manager", [authJwt.verifyToken,authJwt.isAdmin], manager_c.create); 
+    app.put("/admin/manager/:id", [authJwt.verifyToken,authJwt.isAdmin], manager_c.updateById); 
+    app.delete("/admin/manager/:id", [authJwt.verifyToken,authJwt.isAdmin], manager_c.deleteById); 
+    app.get("/admin/managers", [authJwt.verifyToken,authJwt.isAdmin], manager_c.getAll); 
+    app.get("/admin/manager/:id", [authJwt.verifyToken,authJwt.isAdmin], manager_c.getById); 
     
     //Student
-    app.put("/student/:id", student_c.updateById); //jwt: StudentID should be same
+    app.put("/student/:id", [authJwt.verifyToken,authJwt.IDVerify], student_c.updateById); //jwt: StudentID should be same
     
     //Professor
-    app.put("/Professor/:id", professor_c.updateById); //jwt: ProfessorID should be same
+    app.put("/Professor/:id", [authJwt.verifyToken,authJwt.IDVerify], professor_c.updateById); //jwt: ProfessorID should be same
 
 }
