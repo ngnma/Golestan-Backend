@@ -1,5 +1,5 @@
 const User = require('../models/user.model')
-
+var jwt = require("jsonwebtoken");
 // Get All Users
 exports.getAll = async(req,res)=>{
     try{
@@ -27,7 +27,9 @@ exports.login = async(req,res)=>{
         if(user == null){
             res.status(404).json({message:"Not Found"})
         }else{
-            res.status(200).json(user);
+            //res.status(200).json(user)
+            let token = jwt.sign({id:user.id},"salt1234",{expiresIn:86400});
+            res.status(200).send({'user_id':user.user_id,'name':user.l_name,'role':user.role,'token':token});
         }
     }catch(error){
         console.log(error.message);

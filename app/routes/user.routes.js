@@ -10,10 +10,10 @@ module.exports = function(app){
     // Get All Users
     app.get("/Users", user_c.getAll)
     // Login
-    app.get("/login", user_c.login)
+    app.post("/login", user_c.login)
 
     // Manager - student
-    app.get("/students", student_c.getAll); 
+    //app.get("/students",['authJwt.verifyToken'] ,student_c.getAll); 
     app.get("/student/:id", student_c.getById);
     // Manager - Professor
     app.get("/Professors", professor_c.getAll); 
