@@ -1,5 +1,7 @@
 const student_c = require("../controllers/student.controller");
 const user_c = require("../controllers/admin.controller");
+const professor_c = require("../controllers/professor.controller");
+const manager_c = require("../controllers/manager.controller");
 
 module.exports = function(app){
 
@@ -12,15 +14,15 @@ module.exports = function(app){
     app.get("/students", student_c.getAll); 
     app.get("/student/:id", student_c.getById);
     // Manager - Professor
-    app.get("/Professors", ); 
-    app.get("/Professor/:id", );
+    app.get("/Professors", professor_c.getAll); 
+    app.get("/Professor/:id", professor_c.getById);
 
     // IT - Professor
-    app.post("/admin/Professor", ); 
-    app.put("/admin/Professor/:id", ); 
-    app.delete("/admin/Professor/:id", ); 
-    app.get("/admin/Professors", ); 
-    app.get("/admin/Professor/:id", ); 
+    app.post("/admin/Professor", professor_c.create); 
+    app.put("/admin/Professor/:id", professor_c.updateById); 
+    app.delete("/admin/Professor/:id", professor_c.deleteById); 
+    app.get("/admin/Professors", professor_c.getAll); 
+    app.get("/admin/Professor/:id", professor_c.getById); 
     // IT - student
     app.post("/admin/student", student_c.create); 
     app.put("/admin/student/:id", student_c.updateById); 
@@ -28,16 +30,16 @@ module.exports = function(app){
     app.get("/admin/students", student_c.getAll); 
     app.get("/admin/student/:id", student_c.getById);
     // IT - manager
-    app.post("/admin/manager", ); 
-    app.put("/admin/manager/:id", ); 
-    app.delete("/admin/manager/:id", ); 
-    app.get("/admin/managers", ); 
-    app.get("/admin/manager/:id", ); 
+    app.post("/admin/manager", manager_c.create); 
+    app.put("/admin/manager/:id", manager_c.updateById); 
+    app.delete("/admin/manager/:id", manager_c.deleteById); 
+    app.get("/admin/managers", manager_c.getAll); 
+    app.get("/admin/manager/:id", manager_c.getById); 
     
     //Student
-    app.put("/student/:id", ); //jwt: StudentID should be same
+    app.put("/student/:id", student_c.updateById); //jwt: StudentID should be same
     
     //Professor
-    app.put("/Professor/:id", ); //jwt: ProfessorID should be same
+    app.put("/Professor/:id", professor_c.updateById); //jwt: ProfessorID should be same
 
 }
