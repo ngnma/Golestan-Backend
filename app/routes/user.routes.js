@@ -2,6 +2,7 @@ const student_c = require("../controllers/student.controller");
 const user_c = require("../controllers/admin.controller");
 const professor_c = require("../controllers/professor.controller");
 const manager_c = require("../controllers/manager.controller");
+const authJwt = require("../middelware/authJwt");
 
 module.exports = function(app){
 
@@ -13,7 +14,7 @@ module.exports = function(app){
     app.post("/login", user_c.login)
 
     // Manager - student
-    //app.get("/students",['authJwt.verifyToken'] ,student_c.getAll); 
+    app.get("/students",[authJwt.verifyToken] ,student_c.getAll); 
     app.get("/student/:id", student_c.getById);
     // Manager - Professor
     app.get("/Professors", professor_c.getAll); 
