@@ -30,7 +30,7 @@ exports.login = async(req,res)=>{
             res.status(404).json({message:"Not Found"})
         }else{
             //res.status(200).json(user)
-            let token = jwt.sign({id:user.id},config.secret,{expiresIn:86400});
+            let token = jwt.sign({id:user.id,role:user.role},config.secret,{expiresIn:86400});
             res.status(200).send({'user_id':user.user_id,'name':user.l_name,'role':user.role,'id':user.id,'token':token});
         }
     }catch(error){

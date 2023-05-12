@@ -14,7 +14,7 @@ module.exports = function(app){
     app.post("/login", user_c.login)
 
     // Manager - student
-    app.get("/students",[authJwt.verifyToken] ,student_c.getAll); 
+    app.get("/students",[authJwt.verifyToken,authJwt.isManager] ,student_c.getAll); 
     app.get("/student/:id", student_c.getById);
     // Manager - Professor
     app.get("/Professors", professor_c.getAll); 
