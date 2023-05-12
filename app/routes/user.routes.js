@@ -23,8 +23,8 @@ module.exports = function(app){
     app.get("/admin/Professor/:id", ); 
     // IT - student
     app.post("/admin/student", student_c.create); 
-    app.put("/admin/student/:id", ); 
-    app.delete("/admin/student/:id", ); 
+    app.put("/admin/student/:id", student_c.updateById); 
+    app.delete("/admin/student/:id", student_c.deleteById); 
     app.get("/admin/students", student_c.getAll); 
     app.get("/admin/student/:id", student_c.getById);
     // IT - manager
