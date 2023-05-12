@@ -1,11 +1,9 @@
-const mongoose = require('mongoose')
-const activeCourseSchema = mongoose.Schema(
-    {
-        ID:{ type : String, required : true},
-        title:{ type : String, required : true},
-        unit:{ type : Number, require : true},
-        prerequistie : [String],
-        nedded : [String],
+const mongoose = require('mongoose');
+const Course = require("./course.model");
+
+const ActiveCourse = Course.discriminator('ActiveCourse',
+  new mongoose.Schema(
+    {    
         activeCourse_id : { type : String, required : true},
         class_dates : [String],
         class_time : String,
@@ -17,8 +15,6 @@ const activeCourseSchema = mongoose.Schema(
         semester : String
     },{
         timestamp:true
-    }
-)
+    },{discriminatorKey: 'kind'}));
 
-const ActiveCourse = mongoose.model('ActiveCourse',activeCourseSchema);
 module.exports = ActiveCourse;
