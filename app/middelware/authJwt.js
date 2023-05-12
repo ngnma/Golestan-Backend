@@ -16,7 +16,6 @@ verifyToken = (req,res,next)=>{
         req.userId = decoded.id;
         req.userRole = decoded.role;
         req.paramId = req.params.id;
-        console.log(req.paramId)
         next()
     });
 }
@@ -52,7 +51,7 @@ IDVerify = (req,res,next)=>{
             next();
             return;
         }
-        res.status(403).send({message:`Access denied(you are not the student with id ${req.paramId}`}); 
+        res.status(403).send({message:`Access denied(you are not the user with id ${req.paramId}`}); 
     }catch(error){
         res.status(500).json({message:error.message});
     }

@@ -40,9 +40,9 @@ module.exports = function(app){
     app.get("/admin/manager/:id", [authJwt.verifyToken,authJwt.isAdmin], manager_c.getById); 
     
     //Student
-    app.put("/student/:id", [authJwt.verifyToken,authJwt.IDVerify], student_c.updateById); //jwt: StudentID should be same
+    app.put("/student/:id", [authJwt.verifyToken,authJwt.IDVerify], student_c.updateById); 
     
     //Professor
-    app.put("/Professor/:id", [authJwt.verifyToken,authJwt.IDVerify], professor_c.updateById); //jwt: ProfessorID should be same
+    app.put("/Professor/:id", [authJwt.verifyToken,authJwt.IDVerify], professor_c.updateById);
 
 }
