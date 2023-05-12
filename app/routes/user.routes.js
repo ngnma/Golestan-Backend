@@ -9,6 +9,8 @@ module.exports = function(app){
     app.post("/IT", user_c.create)
     // Get All Users
     app.get("/Users", user_c.getAll)
+    // Login
+    app.get("/login", user_c.login)
 
     // Manager - student
     app.get("/students", student_c.getAll); 

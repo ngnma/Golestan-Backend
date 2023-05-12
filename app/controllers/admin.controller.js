@@ -20,3 +20,17 @@ exports.create = async(req,res)=>{
         res.status(500).json({message:error.message});
     }
 };
+// Login
+exports.login = async(req,res)=>{
+    try{
+        const user = await User.findOne({ 'user_id': req.body.user_id ,'password':req.body.password});
+        if(user == null){
+            res.status(404).json({message:"Not Found"})
+        }else{
+            res.status(200).json(user);
+        }
+    }catch(error){
+        console.log(error.message);
+        res.status(500).json({message:error.message});
+    }
+};
