@@ -1,17 +1,9 @@
-const mongoose = require('mongoose')
-const managerSchema = mongoose.Schema(
-    {
-        user_id:{ type : String, required : true},
-        f_name:{ type : String, required : true},
-        l_name:{ type : String, required : true},
-        password:{ type : String, required : true},
-        email:{ type : String},
-        phone:{ type : String},
-        faculty:{ type : String, required : true},
-    },{
-        timestamp:true
-    }
-)
+const mongoose = require('mongoose');
+const User = require("./user.model");
 
-const Manager = mongoose.model('Manager',managerSchema);
+const Manager = User.discriminator('Manager',
+  new mongoose.Schema({ 
+    faculty:{ type : String, required : true}
+}, {discriminatorKey: 'kind'}));
+
 module.exports = Manager;
