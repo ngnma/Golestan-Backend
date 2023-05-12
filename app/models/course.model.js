@@ -9,6 +9,10 @@ const courseSchema = mongoose.Schema(
             type : Number,
             require : [true, "please enter unit for course:"]
         },
+        faculty:{
+            type : String,
+            required : [true, "please enter a faculty for course:"]
+        },
         prerequistie : [String],
         nedded : [String]
     },{
